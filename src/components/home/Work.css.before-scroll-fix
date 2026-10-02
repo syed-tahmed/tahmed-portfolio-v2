@@ -1,0 +1,857 @@
+.work-section {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 104px);
+  min-height: 650px;
+
+  margin-top: 104px;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  background: #05080d;
+  color: #fff;
+
+  perspective: 2200px;
+}
+
+
+/* ===============================
+   BACKGROUND
+================================ */
+
+.work-bg {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      #0a1a29 0%,
+      #07111c 32%,
+      #05090f 65%,
+      #080506 100%
+    );
+
+  z-index: -10;
+}
+
+.blue-glow {
+  position: absolute;
+
+  width: 60vw;
+  height: 65vh;
+
+  left: -20vw;
+  top: 20vh;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(25,100,160,0.18),
+      transparent 70%
+    );
+
+  filter: blur(70px);
+
+  z-index: -8;
+}
+
+.red-glow {
+  position: absolute;
+
+  width: 55vw;
+  height: 60vh;
+
+  right: -20vw;
+  top: -15vh;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(125,25,40,0.16),
+      transparent 70%
+    );
+
+  filter: blur(70px);
+
+  z-index: -8;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+
+  z-index: 40;
+
+  pointer-events: none;
+
+  opacity: 0.08;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+}
+
+
+/* ===============================
+   HEADER
+================================ */
+
+.work-heading {
+  position: absolute;
+
+  top: 28px;
+  left: 50%;
+
+  width: 100%;
+
+  transform:
+    translateX(-50%);
+
+  text-align: center;
+
+  z-index: 100;
+
+  pointer-events: none;
+}
+
+.work-heading span {
+  display: inline-block;
+
+  padding:
+    6px 13px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.13);
+
+  border-radius:
+    999px;
+
+  color:
+    rgba(220,230,240,0.42);
+
+  background:
+    rgba(8,18,28,0.4);
+
+  font-size: 8px;
+
+  letter-spacing:
+    0.2em;
+
+  text-transform:
+    uppercase;
+}
+
+.work-heading h2 {
+  margin: 10px 0 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 42px;
+
+  line-height: 0.9;
+
+  font-weight: 400;
+
+  letter-spacing: -0.05em;
+}
+
+.work-heading p {
+  margin-top: 21px;
+
+  color:
+    rgba(200,215,225,0.3);
+
+  font-size: 8px;
+
+  letter-spacing:
+    0.28em;
+}
+
+
+/* ===============================
+   STAGE
+================================ */
+
+.carousel-stage {
+  position: absolute;
+
+  left: 50%;
+  top: 61%;
+
+  width: 100%;
+  height: 500px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  perspective:
+    2200px;
+
+  transform-style:
+    preserve-3d;
+
+  z-index: 20;
+}
+
+
+/* ===============================
+   RING
+================================ */
+
+.project-ring {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 1px;
+  height: 1px;
+
+  transform-style:
+    preserve-3d;
+
+  will-change:
+    transform;
+}
+
+
+/* ===============================
+   CARD
+================================ */
+
+.project-card {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  /*
+   * MUCH SMALLER
+   */
+  width: 430px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    rotateY(var(--angle))
+    translateZ(420px);
+
+  transform-style:
+    preserve-3d;
+
+  opacity: 1;
+
+  filter: blur(0);
+
+  will-change:
+    opacity,
+    filter;
+
+  transition:
+    opacity
+    0.25s ease,
+
+    filter
+    0.25s ease;
+}
+
+
+/* ===============================
+   CARD INNER
+================================ */
+
+.card-inner {
+  width: 100%;
+
+  transform-style:
+    preserve-3d;
+}
+
+
+/* ===============================
+   IMAGE
+================================ */
+
+.project-image {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio:
+    16 / 10;
+
+  overflow: hidden;
+
+  border-radius:
+    18px;
+
+  background:
+    #09131d;
+
+  border:
+    1px solid
+    rgba(150,195,220,0.18);
+
+  box-shadow:
+    0 30px 70px
+    rgba(0,0,0,0.65);
+
+  transition:
+    border-color
+    0.4s ease,
+
+    box-shadow
+    0.4s ease;
+}
+
+.project-card.is-front
+.project-image {
+  border-color:
+    rgba(95,180,240,0.48);
+
+  box-shadow:
+    0 35px 80px
+    rgba(0,0,0,0.78),
+
+    0 0 55px
+    rgba(40,130,210,0.1);
+}
+
+
+/* ===============================
+   IMAGE
+================================ */
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  transform:
+    scale(1.01);
+
+  transition:
+    transform
+    0.8s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
+}
+
+.project-card.is-front
+.project-image img {
+  transform:
+    scale(1.025);
+}
+
+
+/* ===============================
+   SHADE
+================================ */
+
+.image-shade {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 50%,
+      rgba(0,0,0,0.16)
+    );
+}
+
+
+/* ===============================
+   NUMBER
+================================ */
+
+.project-number {
+  position: absolute;
+
+  top: 14px;
+  left: 14px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.18);
+
+  border-radius: 50%;
+
+  background:
+    rgba(4,10,15,0.55);
+
+  backdrop-filter:
+    blur(12px);
+
+  font-size: 8px;
+
+  color:
+    rgba(255,255,255,0.7);
+}
+
+
+/* ===============================
+   BUTTON
+================================ */
+
+.project-button {
+  position: absolute;
+
+  right: 14px;
+  bottom: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  height: 40px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.26);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(4,11,17,0.78);
+
+  backdrop-filter:
+    blur(14px);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 8px;
+
+  letter-spacing:
+    0.08em;
+
+  opacity: 0;
+
+  transform:
+    translateY(8px);
+
+  transition:
+    opacity
+    0.35s ease,
+
+    transform
+    0.35s ease,
+
+    background
+    0.25s ease;
+}
+
+.project-card.is-front
+.project-button {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.project-button:hover {
+  background:
+    rgba(30,90,135,0.4);
+}
+
+.project-button strong {
+  font-size: 14px;
+
+  font-weight: 400;
+}
+
+
+/* ===============================
+   CAPTION
+================================ */
+
+.project-caption {
+  margin-top: 12px;
+
+  padding-left: 3px;
+
+  opacity: 0.35;
+
+  transition:
+    opacity
+    0.35s ease;
+}
+
+.project-card.is-front
+.project-caption {
+  opacity: 1;
+}
+
+.project-caption span {
+  color:
+    rgba(100,190,225,0.7);
+
+  font-size: 7px;
+
+  letter-spacing:
+    0.2em;
+}
+
+.project-caption h3 {
+  margin:
+    4px 0 0;
+
+  max-width: 360px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  font-weight: 400;
+}
+
+
+/* ===============================
+   CENTER LIGHT
+================================ */
+
+.focus-glow {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 400px;
+  height: 250px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(35,100,150,0.09),
+      transparent 70%
+    );
+
+  filter:
+    blur(35px);
+
+  pointer-events: none;
+}
+
+
+/* ===============================
+   BOTTOM
+================================ */
+
+.work-bottom {
+  position: absolute;
+
+  left: 50%;
+  bottom: 25px;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 9px;
+
+  z-index: 100;
+
+  pointer-events: none;
+}
+
+.work-bottom span {
+  font-size: 7px;
+
+  letter-spacing:
+    0.25em;
+
+  color:
+    rgba(200,215,225,0.35);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 32px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(100,190,240,0.7),
+      transparent
+    );
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .project-card {
+    width: 380px;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      rotateY(var(--angle))
+      translateZ(370px);
+  }
+}
+
+
+@media (max-width: 700px) {
+  .work-heading {
+    top: 24px;
+  }
+
+  .work-heading h2 {
+    font-size: 42px;
+  }
+
+  .carousel-stage {
+    top: 53%;
+  }
+
+  .project-card {
+    width: 78vw;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      rotateY(var(--angle))
+      translateZ(300px);
+  }
+
+  .project-caption h3 {
+    font-size: 17px;
+  }
+}
+
+
+/* =========================================================
+   FINAL WORK SECTION COMPOSITION
+   Keeps heading, 3D cards and project information visible
+   ========================================================= */
+
+.work-section {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+  min-height: 760px;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  box-sizing: border-box;
+}
+
+
+/* -------------------------
+   WORK HEADING
+------------------------- */
+
+.work-heading {
+  position: absolute;
+
+  top: 46px;
+  left: 50%;
+
+  width: 100%;
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  z-index: 100;
+
+  pointer-events: none;
+}
+
+.work-heading h2 {
+  margin: 8px 0 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(38px, 4vw, 54px);
+
+  line-height: 0.95;
+
+  font-weight: 400;
+
+  letter-spacing: -0.055em;
+
+  color: #f5f7fa;
+}
+
+.work-heading p {
+  margin-top: 18px;
+
+  color: rgba(200, 215, 225, 0.32);
+
+  font-size: 9px;
+
+  letter-spacing: 0.30em;
+
+  text-transform: uppercase;
+}
+
+
+/* -------------------------
+   3D CAROUSEL STAGE
+------------------------- */
+
+.carousel-stage {
+  position: absolute;
+
+  left: 50%;
+
+  /*
+    The carousel is intentionally centered
+    slightly below the heading.
+  */
+  top: 54%;
+
+  width: 100%;
+  height: 500px;
+
+  transform:
+    translate(-50%, -50%);
+
+  perspective: 2200px;
+
+  transform-style: preserve-3d;
+
+  z-index: 20;
+}
+
+
+/* -------------------------
+   PROJECT INFORMATION
+------------------------- */
+
+.project-info {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 24px;
+
+  transform: translateX(-50%);
+
+  width: min(760px, 80vw);
+
+  text-align: center;
+
+  z-index: 60;
+
+  pointer-events: none;
+}
+
+
+/* -------------------------
+   RESPONSIVE
+------------------------- */
+
+@media (max-width: 900px) {
+
+  .work-section {
+    min-height: 700px;
+  }
+
+  .work-heading {
+    top: 38px;
+  }
+
+  .work-heading h2 {
+    font-size: 38px;
+  }
+
+  .carousel-stage {
+    top: 55%;
+    height: 440px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .work-section {
+    min-height: 680px;
+  }
+
+  .work-heading {
+    top: 32px;
+  }
+
+  .work-heading h2 {
+    font-size: 32px;
+  }
+
+  .work-heading p {
+    margin-top: 12px;
+    font-size: 7px;
+  }
+
+  .carousel-stage {
+    top: 56%;
+    height: 400px;
+  }
+}

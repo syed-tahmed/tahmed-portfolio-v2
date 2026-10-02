@@ -1,0 +1,176 @@
+.footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(120% 90% at 20% 20%, #23264d 0%, #1a1b2e 45%, #16172a 100%);
+  color: #eef0fa;
+}
+
+/* Blurred colour blobs behind the content */
+.footer__blob {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.85;
+}
+
+.footer__blob--blue {
+  top: 12%;
+  left: 14%;
+  width: clamp(90px, 12vw, 150px);
+  aspect-ratio: 1;
+  background: #3a5bd9;
+}
+
+.footer__blob--purple {
+  bottom: 22%;
+  right: 26%;
+  width: clamp(80px, 10vw, 130px);
+  aspect-ratio: 1;
+  background: #8e3a9c;
+}
+
+/* The email card and the robot share the right-hand column */
+.footer__right {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.footer__right .footer__cta {
+  flex: 1;
+  min-width: 0;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.footer__links {
+  display: flex;
+  gap: clamp(2.5rem, 6vw, 5rem);
+}
+
+.footer__links ul {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.footer__links a,
+.footer__links button {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: rgba(238, 240, 250, 0.72);
+  transition: color 0.2s ease;
+}
+
+.footer__links a:hover,
+.footer__links button:hover {
+  color: #ffffff;
+}
+
+/* White card with the email prompt */
+/* Prompt and button stay on one line, so the card stays compact */
+.footer__cta {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.55);
+}
+
+.footer__cta p {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  line-height: 1.2;
+  /* Stays on one line, so the card keeps its pill shape */
+  white-space: nowrap;
+}
+
+/* A smaller button to match the tighter card */
+.footer__cta .btn {
+  flex-shrink: 0;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.82rem;
+}
+
+.footer__credit {
+  padding-block: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(238, 240, 250, 0.6);
+}
+
+@media (max-width: 860px) {
+  .footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .footer__right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* On a narrow screen the prompt can wrap again */
+  .footer__cta p {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__cta {
+    padding: 1.25rem;
+  }
+
+  .footer__cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer__right {
+    width: 100%;
+  }
+
+  .footer__cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 24px;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  .footer__cta > p {
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  .footer__cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

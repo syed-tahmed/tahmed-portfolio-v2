@@ -1,0 +1,53 @@
+.scroll-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  margin: clamp(3rem, 7vw, 5rem) auto;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: #ffffff;
+}
+
+.scroll-ring__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: scroll-ring-spin 20s linear infinite;
+}
+
+.scroll-ring:hover .scroll-ring__svg {
+  animation-duration: 8s;
+}
+
+@keyframes scroll-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.scroll-ring__text {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  fill: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-ring__arrow {
+  transition: transform 0.3s ease;
+}
+
+.scroll-ring:hover .scroll-ring__arrow {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-ring__svg {
+    animation: none;
+  }
+}

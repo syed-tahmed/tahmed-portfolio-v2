@@ -1,0 +1,132 @@
+.robot-face {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* ===== Eyes ===== */
+.robot-face__eye {
+  transform-origin: center;
+  animation: robot-blink 5s ease-in-out infinite;
+}
+
+@keyframes robot-blink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.12);
+  }
+}
+
+/* The curved eyes are hidden until the robot grins */
+.robot-face__eye-curve {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.robot-face--grin .robot-face__eye-curve {
+  opacity: 1;
+}
+
+.robot-face--grin .robot-face__eye {
+  opacity: 0;
+  animation: none;
+}
+
+/* ===== Mouth ===== */
+.robot-face__mouth {
+  transition: d 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.robot-face--happy .robot-face__mouth {
+  d: path('M48 64 Q60 78 72 64');
+}
+
+/* The widest smile, used on hover */
+.robot-face--grin .robot-face__mouth {
+  d: path('M44 62 Q60 82 76 62 Q60 72 44 62');
+  stroke: none;
+  fill: #8cf24a;
+}
+
+.robot-face--thinking .robot-face__mouth {
+  d: path('M54 69 H66');
+}
+
+/* ===== Cheeks ===== */
+.robot-face__cheek {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.robot-face--happy .robot-face__cheek,
+.robot-face--grin .robot-face__cheek {
+  opacity: 0.55;
+}
+
+/* ===== Antenna and glow ===== */
+.robot-face__antenna {
+  transform-origin: 60px 6px;
+  animation: robot-antenna 2.2s ease-in-out infinite;
+}
+
+@keyframes robot-antenna {
+  50% {
+    transform: scale(1.35);
+  }
+}
+
+.robot-face__glow {
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+
+.robot-face--grin .robot-face__glow,
+.robot-face--happy .robot-face__glow {
+  opacity: 0.9;
+}
+
+/* ===== Waving arm ===== */
+.robot-face__arm {
+  transform-origin: 100px 94px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.robot-face--grin .robot-face__arm,
+.robot-face--wave .robot-face__arm {
+  opacity: 1;
+  animation: robot-wave 0.7s ease-in-out infinite;
+}
+
+/* The waving mood also gets the happy face */
+.robot-face--wave .robot-face__mouth {
+  d: path('M48 64 Q60 78 72 64');
+}
+
+.robot-face--wave .robot-face__cheek {
+  opacity: 0.55;
+}
+
+.robot-face--wave .robot-face__glow {
+  opacity: 0.9;
+}
+
+@keyframes robot-wave {
+  0%, 100% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-28deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .robot-face__eye,
+  .robot-face__antenna,
+  .robot-face__arm {
+    animation: none;
+  }
+}

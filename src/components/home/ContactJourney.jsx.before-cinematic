@@ -1,0 +1,214 @@
+import { useLayoutEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import './ContactJourney.css'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const scenes = [
+  {
+    image:
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=85',
+    label: '01 / EXPLORE',
+    title: 'Find the right direction.',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=85',
+    label: '02 / DISCOVER',
+    title: 'Follow the signal.',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=85',
+    label: '03 / ARRIVE',
+    title: 'You found me.',
+  },
+]
+
+export default function ContactJourney() {
+  const sectionRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.contact-journey__card')
+      const line = document.querySelector('.contact-journey__line')
+      const intro = document.querySelector('.contact-journey__intro')
+      const final = document.querySelector('.contact-journey__final')
+
+      gsap.from(intro, {
+        y: 60,
+        opacity: 0,
+        duration: 1.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: intro,
+          start: 'top 82%',
+          once: true,
+        },
+      })
+
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          {
+            y: 140,
+            x: index % 2 === 0 ? -90 : 90,
+            rotateY: index % 2 === 0 ? -22 : 22,
+            rotateZ: index % 2 === 0 ? -5 : 5,
+            scale: 0.72,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            x: 0,
+            rotateY: 0,
+            rotateZ: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1.35,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              end: 'top 35%',
+              scrub: 1.2,
+            },
+          }
+        )
+
+        gsap.to(card.querySelector('.contact-journey__image'), {
+          yPercent: -12,
+          scale: 1.12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        })
+      })
+
+      if (line) {
+        gsap.fromTo(
+          line,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            transformOrigin: 'top center',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.contact-journey__path',
+              start: 'top 70%',
+              end: 'bottom 65%',
+              scrub: true,
+            },
+          }
+        )
+      }
+
+      gsap.from(final, {
+        y: 80,
+        opacity: 0,
+        scale: 0.94,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: final,
+          start: 'top 82%',
+          once: true,
+        },
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section className="contact-journey" ref={sectionRef}>
+      <div className="contact-journey__glow" />
+
+      <div className="contact-journey__intro">
+        <span className="contact-journey__eyebrow">CONTACT / 03</span>
+
+        <h2>
+          Let me know
+          <br />
+          <span>if you want.</span>
+        </h2>
+
+        <p>
+          Some ideas are better explored together.
+          <br />
+          Follow the path and find me.
+        </p>
+      </div>
+
+      <div className="contact-journey__path">
+        <div className="contact-journey__line" />
+
+        {scenes.map((scene, index) => (
+          <article
+            className={`contact-journey__card contact-journey__card--${index + 1}`}
+            key={scene.label}
+          >
+            <div className="contact-journey__image-wrap">
+              <img
+                className="contact-journey__image"
+                src={scene.image}
+                alt=""
+              />
+
+              <div className="contact-journey__image-overlay" />
+            </div>
+
+            <div className="contact-journey__card-info">
+              <span>{scene.label}</span>
+              <h3>{scene.title}</h3>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className="contact-journey__final">
+        <div className="contact-journey__final-orbit">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <span className="contact-journey__eyebrow">
+          YOU FOUND THE WAY
+        </span>
+
+        <h2>
+          Let&apos;s make
+          <br />
+          something <em>great.</em>
+        </h2>
+
+        <Link to="/contact" className="contact-journey__button">
+          <span>Find Me</span>
+
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 12h13m0 0-5-5m5 5-5 5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+      </div>
+    </section>
+  )
+}

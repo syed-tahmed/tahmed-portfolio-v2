@@ -1,0 +1,108 @@
+.ccard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(90% 60% at 70% 25%, rgba(255, 255, 255, 0.09), transparent 60%),
+    radial-gradient(70% 50% at 20% 80%, rgba(255, 255, 255, 0.06), transparent 60%),
+    #101014;
+  color: #f2f3f8;
+}
+
+/* A dark veil keeps the text readable over the moving grid */
+.ccard__content::before {
+  content: '';
+  position: absolute;
+  inset: -2rem;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(8, 8, 10, 0.92) 0%, rgba(8, 8, 10, 0.35) 34%, rgba(8, 8, 10, 0.4) 66%, rgba(8, 8, 10, 0.95) 100%);
+}
+
+.ccard__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ccard__socials {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.ccard__socials a {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #d7f45f;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.ccard__socials a:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.ccard__status {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+  font-family: var(--font-body);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+}
+
+.ccard__note {
+  margin-top: 0.35rem;
+  color: rgba(242, 243, 248, 0.6);
+  font-size: 0.9rem;
+}
+
+/* The rows sit at the bottom of the card */
+.ccard__rows {
+  margin: auto 0 0;
+  padding-top: 3rem;
+  display: grid;
+}
+
+.ccard__row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ccard__row:last-child {
+  border-bottom: none;
+}
+
+.ccard__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ccard__row dt {
+  font-size: 0.75rem;
+  color: rgba(242, 243, 248, 0.55);
+}
+
+.ccard__row dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.95rem;
+  word-break: break-word;
+}

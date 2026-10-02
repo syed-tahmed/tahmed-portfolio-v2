@@ -1,0 +1,94 @@
+.cform {
+  display: grid;
+  gap: 1.1rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+
+.cform__field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.cform__field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy-soft);
+}
+
+/* One custom arrow, drawn as a background image */
+.cform select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231b2359' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+.cform input,
+.cform select,
+.cform textarea {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cform input::placeholder,
+.cform textarea::placeholder {
+  color: #aeb3c9;
+}
+
+.cform input:focus,
+.cform select:focus,
+.cform textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(27, 35, 89, 0.08);
+}
+
+.cform [aria-invalid='true'] {
+  border-color: var(--pink);
+}
+
+.cform__error {
+  font-size: 0.82rem;
+  color: var(--pink);
+}
+
+.cform__success {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: #e8f7f0;
+  color: #14795c;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.cform__submit {
+  margin-top: 0.4rem;
+  padding: 0.95rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--dark);
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.cform__submit:hover {
+  background: var(--navy);
+  transform: translateY(-2px);
+}

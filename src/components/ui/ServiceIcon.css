@@ -1,0 +1,27 @@
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-icon--uiux {
+  background: #efeafd;
+  color: #6b4ede;
+}
+
+.service-icon--web {
+  background: #e4edfd;
+  color: #2f5ae0;
+}
+
+.service-icon--brand {
+  background: #fce9f0;
+  color: #d2416d;
+}
+
+.services__card:hover .service-icon {
+  transform: translateY(-3px) rotate(-4deg);
+}

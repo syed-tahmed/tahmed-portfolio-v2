@@ -1,0 +1,90 @@
+.focus-text {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(120% 90% at 50% 100%, #120d2a 0%, #07060f 60%);
+}
+
+/* A soft dark pool behind the words so they always read over the dots */
+.focus-text__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(48% 34% at 50% 46%, rgba(7, 6, 15, 0.75), transparent 80%);
+}
+
+/* All sentences share one spot; perspective lets the words tip back */
+.focus-text__stage {
+  position: absolute;
+  inset: 0 0 12% 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  perspective: 700px;
+  pointer-events: none;
+}
+
+.focus-text__line {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.3em;
+  max-width: min(90vw, 50rem);
+  padding-inline: 1.25rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.4vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  transform-style: preserve-3d;
+}
+
+.focus-text__word {
+  display: inline-block;
+  text-shadow: 0 0 26px rgba(120, 100, 240, 0.45), 0 4px 20px rgba(0, 0, 0, 0.7);
+  will-change: transform, opacity, filter;
+}
+
+/* Thin bar along the bottom showing how far through the scene you are */
+.focus-text__progress {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  z-index: 2;
+  width: min(220px, 50vw);
+  height: 2px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.focus-text__progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #5a4ae0, #e2456d, #f2d98a);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Reduced motion: no pinning, every sentence simply listed */
+.focus-text.is-static {
+  height: auto;
+  padding-block: 6rem;
+}
+
+.focus-text.is-static .focus-text__stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.focus-text.is-static .focus-text__progress {
+  display: none;
+}

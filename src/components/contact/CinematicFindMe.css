@@ -1,0 +1,361 @@
+.cinematic-find {
+  position: relative;
+  height: 420vh;
+  background: #03050b;
+  color: #fff;
+}
+
+.cinematic-find__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 680px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cinematic-find__world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #03050b;
+}
+
+.cinematic-find__scene {
+  position: absolute;
+  inset: -7%;
+  opacity: 0;
+  transform:
+    translate3d(
+      var(--camera-x),
+      var(--camera-y),
+      0
+    )
+    scale(var(--camera-scale));
+  transition: opacity 1.2s ease;
+}
+
+.cinematic-find__scene.is-active {
+  opacity: 1;
+}
+
+.cinematic-find__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter:
+    saturate(0.72)
+    contrast(1.08)
+    brightness(0.58);
+}
+
+.cinematic-find__sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 70% 28%,
+      rgba(110, 139, 255, 0.25),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2, 5, 14, 0.42),
+      rgba(2, 5, 14, 0.05) 42%,
+      rgba(2, 5, 14, 0.85)
+    );
+  pointer-events: none;
+}
+
+.cinematic-find__fog {
+  position: absolute;
+  width: 70vw;
+  height: 20vw;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.16;
+  background: #b8c8ff;
+  pointer-events: none;
+}
+
+.cinematic-find__fog--one {
+  left: -15%;
+  bottom: 12%;
+  transform: rotate(-8deg);
+}
+
+.cinematic-find__fog--two {
+  right: -20%;
+  top: 20%;
+  transform: rotate(15deg);
+  opacity: 0.1;
+}
+
+.cinematic-find__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+.cinematic-find__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 28%,
+      rgba(0,0,0,0.32) 68%,
+      rgba(0,0,0,0.78) 100%
+    );
+  pointer-events: none;
+}
+
+.cinematic-find__route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.cinematic-find__route path {
+  fill: none;
+  stroke: rgba(255,255,255,0.72);
+  stroke-width: 1.5;
+  stroke-dasharray: 8 12;
+  stroke-linecap: round;
+  stroke-dashoffset: calc(1200px - (var(--progress) * 1200px));
+}
+
+.cinematic-find__route circle {
+  fill: #fff;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.75));
+}
+
+.cinematic-find__top {
+  position: absolute;
+  top: 34px;
+  left: 5vw;
+  right: 5vw;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.62);
+  z-index: 5;
+}
+
+.cinematic-find__copy {
+  position: absolute;
+  left: 5vw;
+  bottom: 13vh;
+  max-width: 620px;
+  z-index: 5;
+}
+
+.cinematic-find__eyebrow {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.55);
+}
+
+.cinematic-find__copy h2 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(4rem, 8vw, 9rem);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+}
+
+.cinematic-find__copy p {
+  max-width: 430px;
+  margin: 28px 0 0;
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 1.65;
+  color: rgba(255,255,255,0.7);
+}
+
+.cinematic-find__progress {
+  position: absolute;
+  right: 5vw;
+  bottom: 12vh;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  z-index: 5;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.62);
+}
+
+.cinematic-find__progress-line {
+  width: 90px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  overflow: hidden;
+}
+
+.cinematic-find__progress-line i {
+  display: block;
+  width: calc(var(--progress) * 100%);
+  height: 100%;
+  background: #fff;
+}
+
+.cinematic-find__destination {
+  position: absolute;
+  right: 8vw;
+  top: 37%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.65);
+  z-index: 5;
+}
+
+.cinematic-find__destination-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255,255,255,0.8);
+}
+
+.cinematic-find__final {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+  opacity: max(0, calc((var(--progress) - 0.72) * 4));
+  transform: translateY(calc((1 - var(--progress)) * 50px));
+}
+
+.cinematic-find__final > span {
+  margin-bottom: 20px;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.58);
+}
+
+.cinematic-find__final h3 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(3rem, 6vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+}
+
+.cinematic-find__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 38px;
+  padding: 15px 22px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 100px;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(15px);
+  pointer-events: auto;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cinematic-find__button:hover {
+  background: #fff;
+  color: #05060a;
+  border-color: #fff;
+  transform: translateY(-3px);
+}
+
+.cinematic-find__button span {
+  font-size: 18px;
+}
+
+.cinematic-find__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  z-index: 5;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.5);
+}
+
+.cinematic-find__scroll i {
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.8),
+    transparent
+  );
+}
+
+@media (max-width: 700px) {
+  .cinematic-find {
+    height: 340vh;
+  }
+
+  .cinematic-find__sticky {
+    min-height: 620px;
+  }
+
+  .cinematic-find__copy {
+    left: 24px;
+    right: 24px;
+    bottom: 12vh;
+  }
+
+  .cinematic-find__copy h2 {
+    font-size: clamp(3.4rem, 15vw, 5.5rem);
+  }
+
+  .cinematic-find__copy p {
+    max-width: 330px;
+  }
+
+  .cinematic-find__top {
+    left: 24px;
+    right: 24px;
+  }
+
+  .cinematic-find__destination,
+  .cinematic-find__progress {
+    display: none;
+  }
+
+  .cinematic-find__final h3 {
+    font-size: clamp(2.8rem, 14vw, 5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-find__scene {
+    transition: none;
+  }
+}

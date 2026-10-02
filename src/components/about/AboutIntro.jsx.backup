@@ -1,0 +1,99 @@
+import { useRef } from 'react'
+import { about, site } from '../../data/site.js'
+import './AboutIntro.css'
+import AboutBrush from './AboutBrush.jsx'
+
+function AboutIntro() {
+  const sectionRef = useRef(null)
+
+  const handlePointerMove = (event) => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const rect = section.getBoundingClientRect()
+
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+
+    section.style.setProperty('--brush-x', `${x}px`)
+    section.style.setProperty('--brush-y', `${y}px`)
+    section.style.setProperty('--brush-visible', '1')
+  }
+
+  const handlePointerEnter = (event) => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const rect = section.getBoundingClientRect()
+
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+
+    section.style.setProperty('--brush-x', `${x}px`)
+    section.style.setProperty('--brush-y', `${y}px`)
+    section.style.setProperty('--brush-visible', '1')
+  }
+
+  const handlePointerLeave = () => {
+    const section = sectionRef.current
+    if (!section) return
+
+    section.style.setProperty('--brush-visible', '0')
+  }
+
+  return (
+    <section
+      ref={sectionRef}
+      className="about-intro"
+      onPointerMove={handlePointerMove}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+    >
+      <div className="about-intro__gradient" aria-hidden="true" />
+
+      <div className="container about-intro__grid">
+        <AboutBrush />
+        <figure className="about-intro__card">
+          <img src={about.image} alt={about.imageName} />
+
+          <figcaption>
+            <span className="about-intro__dot" aria-hidden="true" />
+
+            <div>
+              <strong>{about.imageName}</strong>
+              <small>{about.imageRole}</small>
+            </div>
+          </figcaption>
+        </figure>
+
+        <div className="about-intro__body">
+          <h1>{about.title}</h1>
+
+          {about.paragraphs.map((text) => (
+            <p key={text}>{text}</p>
+          ))}
+
+          <div className="about-intro__links">
+            <a className="btn" href={site.resumeUrl} target="_blank" rel="noreferrer">
+              Resume ↗
+            </a>
+
+            {about.links.map((link) => (
+              <a
+                key={link.label}
+                className="about-intro__link"
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default AboutIntro

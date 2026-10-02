@@ -1,0 +1,68 @@
+/* ==========================================================
+   Water fill effect for buttons.
+   A coloured body with a rippling crest sits below the button
+   and rises on hover, like water filling a glass.
+   Add the class "btn-wave" to any button or link.
+   ========================================================== */
+.btn-wave {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* The body of water */
+.btn-wave__water {
+  position: absolute;
+  left: -50%;
+  bottom: 0;
+  z-index: -1;
+  width: 200%;
+  height: 100%;
+  transform: translateY(100%);
+  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
+}
+
+/* Solid colour below the crest */
+.btn-wave__water::after {
+  content: '';
+  position: absolute;
+  inset: 14px 0 0;
+  background: var(--wave-colour, #0e87cc);
+}
+
+/* Two crests at different speeds make the surface feel alive */
+.btn-wave__water svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 22px;
+  fill: var(--wave-colour, #0e87cc);
+}
+
+.btn-wave__water svg:first-child {
+  opacity: 0.45;
+  animation: btn-wave-drift 5.5s linear infinite;
+}
+
+.btn-wave__water svg:last-of-type {
+  animation: btn-wave-drift 3.5s linear infinite reverse;
+}
+
+@keyframes btn-wave-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.btn-wave:hover .btn-wave__water,
+.btn-wave:focus-visible .btn-wave__water {
+  transform: translateY(6%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-wave__water svg {
+    animation: none;
+  }
+}

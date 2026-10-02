@@ -1,0 +1,184 @@
+.process {
+  background: var(--white);
+}
+
+.process__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+/* The left column stays in place while the steps scroll */
+.process__intro {
+  position: sticky;
+  top: calc(var(--nav-height) + 4rem);
+}
+
+.process__label {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy-soft);
+}
+
+.process__intro h2 {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 500;
+  max-width: 14ch;
+}
+
+.process__description {
+  margin-top: 1.25rem;
+  max-width: 30rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ===== Steps ===== */
+.process__steps {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Faint line behind the steps, with a dark line that grows over it */
+.process__track {
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 21px;
+  width: 2px;
+  background: var(--line);
+}
+
+.process__progress {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #BA406A;
+  transform-origin: top center;
+}
+
+.process__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  padding: 0.5rem 0;
+}
+
+.process__dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.process__card {
+  padding: 1.1rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  transition: background-color 0.45s ease, border-color 0.45s ease, transform 0.45s ease;
+}
+
+.process__card h3 {
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  transition: color 0.45s ease;
+}
+
+.process__card p {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  opacity: 0.65;
+  transition: opacity 0.45s ease, color 0.45s ease;
+}
+
+/* ===== Active step ===== */
+.process__step.is-active .process__dot {
+  background: #BA406A;
+  border-color: #BA406A;
+  color: var(--white);
+  transform: scale(1.06);
+}
+
+.process__step.is-active .process__card {
+  background: var(--cream);
+  border-color: var(--line);
+  /* Rises as the step becomes the current one */
+  transform: translateY(-10px);
+  box-shadow: 0 26px 45px -34px rgba(27, 35, 89, 0.5);
+}
+
+.process__step.is-active .process__dot {
+  transform: translateY(-10px) scale(1.06);
+}
+
+.process__step.is-active .process__card h3 {
+  color: var(--navy);
+}
+
+.process__step.is-active .process__card p {
+  color: var(--navy-soft);
+  opacity: 1;
+}
+
+/* ===== Tablet and mobile: single column, no sticky ===== */
+@media (max-width: 900px) {
+  .process__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process__intro {
+    position: static;
+  }
+
+  .process__intro h2 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .process__step {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+
+  .process__dot {
+    width: 38px;
+    height: 38px;
+  }
+
+  .process__track {
+    left: 18px;
+  }
+
+  .process__card {
+    padding: 0.9rem 1rem;
+  }
+}

@@ -1,0 +1,7 @@
+.process-icon {
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.process__step.is-active .process-icon {
+  transform: scale(1.08);
+}

@@ -1,0 +1,64 @@
+.resume-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 14px 40px -20px rgba(27, 35, 89, 0.45);
+}
+
+/* The ring of text spins continuously */
+.resume-badge__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: resume-spin 16s linear infinite;
+}
+
+.resume-badge:hover .resume-badge__ring {
+  animation-duration: 7s;
+}
+
+@keyframes resume-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.resume-badge__text {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  fill: var(--navy);
+}
+
+.resume-badge__center {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Stop the spin for visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .resume-badge__ring {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .resume-badge {
+    width: 104px;
+    height: 104px;
+  }
+
+  .resume-badge__text {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,161 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--white) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: var(--nav-height);
+}
+
+/* ===== Logo ===== */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.navbar__mark {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+}
+
+.navbar__dot--orange {
+  background: #f2714f;
+}
+
+.navbar__dot--blue {
+  background: var(--blue);
+  margin-left: -7px;
+  mix-blend-mode: multiply;
+}
+
+.navbar__name {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ===== Links ===== */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 0;
+}
+
+.navbar__links a {
+  position: relative;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--navy-soft);
+  transition: color 0.2s ease;
+}
+
+.navbar__links a:hover {
+  color: var(--navy);
+}
+
+.navbar__links a.is-active {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+/* ===== Hamburger (mobile only) ===== */
+.navbar__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.navbar__burger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin-inline: auto;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+
+.navbar__burger.is-open span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.navbar__burger.is-open span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* ===== Tablet and mobile ===== */
+@media (max-width: 860px) {
+  .navbar__burger {
+    display: flex;
+  }
+
+  .navbar__nav {
+    position: fixed;
+    inset: var(--nav-height) 0 0;
+    padding: 2rem 1.5rem;
+    background: var(--cream);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .navbar__nav.is-open {
+    transform: translateX(0);
+  }
+
+  .navbar__links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .navbar__links a {
+    font-family: var(--font-display);
+    font-size: 2rem;
+  }
+}
+
+/* "Work" is a button because it scrolls instead of changing page */
+.navbar__section-link {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--navy-soft);
+  transition: color 0.2s ease;
+}
+
+.navbar__section-link:hover {
+  color: var(--navy);
+}
+
+@media (max-width: 860px) {
+  .navbar__section-link {
+    font-family: var(--font-display);
+    font-size: 2rem;
+  }
+}

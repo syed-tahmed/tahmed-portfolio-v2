@@ -1,0 +1,126 @@
+import { useState } from "react";
+import "./Services.css";
+
+const services = [
+  {
+    number: "01",
+    title: "UI/UX DESIGN",
+    description:
+      "Creating intuitive, beautiful, and user-centered digital experiences.",
+    tags: ["UX RESEARCH", "INTERFACE DESIGN", "DESIGN SYSTEMS", "PROTOTYPING"],
+    image: "/services/uiux.jpg",
+  },
+  {
+    number: "02",
+    title: "WEB DEVELOPMENT",
+    description:
+      "Building modern, responsive, and performant web applications.",
+    tags: ["FRONTEND", "REACT DEVELOPMENT", "RESPONSIVE WEB", "PERFORMANCE"],
+    image: "/services/web-development.jpg",
+  },
+  {
+    number: "03",
+    title: "BRAND & AI",
+    description:
+      "Building memorable identities and AI-powered digital experiences for modern products.",
+    tags: ["BRANDING", "AI PRODUCTS", "VISUAL IDENTITY", "STRATEGY"],
+    image: "/services/brand-ai.jpg",
+  },
+];
+
+export default function Services() {
+  const [active, setActive] = useState(0);
+
+  const toggleService = (index) => {
+    setActive(active === index ? null : index);
+  };
+
+  return (
+    <section className="services-section" id="services">
+      <div className="services-container">
+
+        <div className="services-intro">
+          <p className="services-eyebrow">SERVICES</p>
+
+          <h2>
+            Services that turn
+            <br />
+            ideas into experiences.
+          </h2>
+
+          <p className="services-subtitle">
+            Design, build and brand work for teams who want one person
+            to take an idea all the way to launch.
+          </p>
+        </div>
+
+        <div className="services-list">
+          {services.map((service, index) => {
+            const isOpen = active === index;
+
+            return (
+              <article
+                className={`service-item ${isOpen ? "is-open" : ""}`}
+                key={service.number}
+              >
+                <button
+                  className="service-header"
+                  onClick={() => toggleService(index)}
+                  aria-expanded={isOpen}
+                >
+                  <div className="service-title-wrap">
+                    <span className="service-number">
+                      {service.number}
+                    </span>
+
+                    <h3>{service.title}</h3>
+                  </div>
+
+                  <span className="service-toggle">
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+
+                <div
+                  className={`service-content ${
+                    isOpen ? "service-content-open" : ""
+                  }`}
+                >
+                  <div className="service-content-inner">
+
+                    <div className="service-info">
+                      <p className="service-description">
+                        {service.description}
+                      </p>
+
+                      <div className="service-tags">
+                        {service.tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+
+                      <a href="#contact" className="service-link">
+                        Let's Work Together
+                        <span>↗</span>
+                      </a>
+                    </div>
+
+                    <div className="service-image-wrap">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="service-image"
+                      />
+                    </div>
+
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
+  );
+}

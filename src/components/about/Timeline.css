@@ -1,0 +1,254 @@
+.timeline {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.timeline__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.5fr) minmax(0, 1.5fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+/* The label stays in view while the cards scroll past */
+.timeline__label {
+  position: sticky;
+  top: calc(var(--nav-height) + 3rem);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  font-weight: 700;
+}
+
+.timeline__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--cream);
+  font-size: 1.3rem;
+}
+
+/* ===== List ===== */
+.timeline__list {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0 0 0 2.5rem;
+  list-style: none;
+  perspective: 1000px;
+}
+
+.timeline__track {
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 7px;
+  width: 2px;
+  background: var(--line);
+}
+
+.timeline__progress {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #6b4ede, #2f5ae0, #189a74);
+  transform-origin: top center;
+}
+
+.timeline__item {
+  position: relative;
+}
+
+/* ===== Marker ===== */
+.timeline__marker {
+  position: absolute;
+  top: 2rem;
+  left: -2.5rem;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background: var(--navy);
+  box-shadow: 0 0 0 3px var(--white);
+  transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.timeline__item:hover .timeline__marker {
+  background: var(--card-accent, var(--pink));
+  transform: scale(1.2);
+}
+
+.timeline__pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--card-accent, var(--navy));
+  opacity: 0;
+}
+
+.timeline__item:hover .timeline__pulse {
+  animation: timeline-pulse 1.6s ease-out infinite;
+}
+
+@keyframes timeline-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* ===== Card ===== */
+.timeline__card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg, var(--white));
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.timeline__card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 34px 60px -40px rgba(27, 35, 89, 0.55);
+}
+
+/* Highlight that follows the cursor across the card */
+.timeline__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.75),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.timeline__card:hover .timeline__glow {
+  opacity: 1;
+}
+
+/* Everything above the glow */
+.timeline__head,
+.timeline__card h3,
+.timeline__subtitle,
+.timeline__detail {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Head row ===== */
+.timeline__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.timeline__index {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--card-accent, var(--navy));
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.timeline__card:hover .timeline__index {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.timeline__period {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--card-accent, var(--navy-soft));
+}
+
+.timeline__card h3 {
+  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+  font-weight: 700;
+}
+
+.timeline__subtitle {
+  margin-top: 0.3rem;
+  color: var(--card-accent, var(--pink));
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.timeline__detail {
+  margin-top: 0.85rem;
+  max-width: 42rem;
+  color: var(--navy-soft);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+/* ===== Card colours =====
+   Each card sets its own accent, so the badge, subtitle and
+   marker stay in tune with the background. */
+.timeline__card--1 {
+  --card-bg: #efecff;
+  --card-accent: #6b4ede;
+}
+
+.timeline__card--2 {
+  --card-bg: #fcf7f2;
+  --card-accent: #c2803a;
+}
+
+.timeline__card--3 {
+  --card-bg: #e9f1ff;
+  --card-accent: #2f5ae0;
+}
+
+.timeline__card--4 {
+  --card-bg: #eafaf3;
+  --card-accent: #189a74;
+}
+
+/* ===== Tablet and mobile ===== */
+@media (max-width: 860px) {
+  .timeline__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline__label {
+    position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline__list {
+    padding-left: 1.75rem;
+  }
+
+  .timeline__marker {
+    left: -1.75rem;
+  }
+
+  .timeline__track {
+    left: 3px;
+  }
+}

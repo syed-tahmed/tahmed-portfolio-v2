@@ -1,0 +1,151 @@
+.collab {
+  background: var(--white);
+}
+
+.collab__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.collab__title {
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.25;
+  max-width: 18ch;
+}
+
+.collab__highlight {
+  color: var(--muted);
+  opacity: 0.55;
+}
+
+.collab__cta {
+  margin-top: 2rem;
+}
+
+/* ===== Photo with two rotating rings ===== */
+.collab__media {
+  --size: min(440px, 80vw);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  margin-inline: auto;
+}
+
+.collab__orbit {
+  position: absolute;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.collab__orbit--outer {
+  inset: 0;
+  --radius: calc(var(--size) / 2 - 1px);
+  animation: orbit-spin 34s linear infinite;
+}
+
+.collab__orbit--inner {
+  inset: 11%;
+  --radius: calc(var(--size) * 0.39);
+  /* reverse turns this ring the other way */
+  animation: orbit-spin 26s linear infinite reverse;
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Each badge is rotated to its angle then pushed out to the ring */
+.collab__tool {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+  border: 1.5px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 14px 30px -16px rgba(27, 35, 89, 0.4);
+  transform: rotate(var(--angle)) translateY(calc(-1 * var(--radius)));
+}
+
+/* Each badge is tilted by its own angle, so undo that first,
+   then counter-spin at the same speed as its ring */
+.collab__tool-inner {
+  display: grid;
+  place-items: center;
+  transform: rotate(calc(-1 * var(--angle)));
+}
+
+.collab__orbit--outer .collab__tool-inner {
+  animation: orbit-spin 34s linear infinite reverse;
+}
+
+.collab__orbit--inner .collab__tool-inner {
+  animation: orbit-spin 26s linear infinite;
+}
+
+.collab__photo {
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.collab__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collab__orbit,
+  .collab__tool-inner {
+    animation: none;
+  }
+}
+
+/* ===== Tablet and mobile ===== */
+@media (max-width: 900px) {
+  .collab__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .collab__title {
+    max-width: none;
+  }
+
+  /* The rings scale with the screen, so nothing is cut off */
+  .collab__media {
+    --size: min(360px, 78vw);
+  }
+}
+
+@media (max-width: 600px) {
+  .collab__media {
+    --size: min(300px, 82vw);
+  }
+
+  .collab__photo {
+    width: 60%;
+  }
+}
+
+@media (max-width: 560px) {
+  .collab__tool {
+    width: 42px;
+    height: 42px;
+    margin: -21px 0 0 -21px;
+  }
+}

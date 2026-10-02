@@ -1,0 +1,222 @@
+import { useLayoutEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { services, servicesIntro } from '../../data/site.js'
+import ServiceIcon from '../ui/ServiceIcon.jsx'
+import './Services.css'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const arrowPath = 'M3 8h10m0 0-4-4m4 4-4 4'
+
+function Services() {
+  const sectionRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const context = gsap.context(() => {
+      const cards = gsap.utils.toArray('.services__card')
+
+      gsap.fromTo(
+        '.services__head',
+        {
+          y: 45,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.services',
+            start: 'top 82%',
+            once: true,
+          },
+        }
+      )
+
+      gsap.fromTo(
+        cards,
+        {
+          y: 90,
+          opacity: 0,
+          scale: 0.94,
+          rotateX: 8,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotateX: 0,
+          duration: 1.05,
+          stagger: 0.14,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.services__grid',
+            start: 'top 82%',
+            once: true,
+          },
+        }
+      )
+
+      cards.forEach((card) => {
+        const glow = card.querySelector('.services__glow')
+        const icon = card.querySelector('.services__icon-wrap')
+
+        const moveGlow = (e) => {
+          const rect = card.getBoundingClientRect()
+
+          const x = e.clientX - rect.left
+          const y = e.clientY - rect.top
+
+          const rotateY = ((x / rect.width) - 0.5) * 8
+          const rotateX = ((y / rect.height) - 0.5) * -8
+
+          gsap.to(card, {
+            rotateX,
+            rotateY,
+            y: -8,
+            duration: 0.45,
+            ease: 'power3.out',
+          })
+
+          gsap.to(glow, {
+            x: x - rect.width / 2,
+            y: y - rect.height / 2,
+            opacity: 1,
+            duration: 0.35,
+            ease: 'power2.out',
+          })
+
+          gsap.to(icon, {
+            y: -5,
+            rotate: 3,
+            duration: 0.4,
+            ease: 'power3.out',
+          })
+        }
+
+        const resetCard = () => {
+          gsap.to(card, {
+            rotateX: 0,
+            rotateY: 0,
+            y: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+          })
+
+          gsap.to(glow, {
+            opacity: 0,
+            duration: 0.5,
+          })
+
+          gsap.to(icon, {
+            y: 0,
+            rotate: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+          })
+        }
+
+        card.addEventListener('pointermove', moveGlow)
+        card.addEventListener('pointerleave', resetCard)
+
+        card._servicesMove = moveGlow
+        card._servicesReset = resetCard
+      })
+    }, sectionRef)
+
+    return () => {
+      const cards = sectionRef.current?.querySelectorAll('.services__card')
+
+      cards?.forEach((card) => {
+        card.removeEventListener('pointermove', card._servicesMove)
+        card.removeEventListener('pointerleave', card._servicesReset)
+      })
+
+      context.revert()
+    }
+  }, [])
+
+  return (
+    <section
+      id="services"
+      className="services section"
+      ref={sectionRef}
+    >
+      <div className="services__ambient services__ambient--one" />
+      <div className="services__ambient services__ambient--two" />
+
+      <div className="container">
+
+        <header className="services__head">
+          <span className="services__eyebrow">
+            WHAT I DO
+          </span>
+
+          <h2>{servicesIntro.title}</h2>
+
+          <p>{servicesIntro.description}</p>
+        </header>
+
+        <div className="services__grid">
+          {services.map((service, index) => (
+            <article
+              className="services__card"
+              key={service.title}
+            >
+              <div className="services__glow" />
+
+              <div className="services__card-inner">
+
+                <div className="services__top">
+                  <div className="services__icon-wrap">
+                    <ServiceIcon name={service.icon} />
+                  </div>
+
+                  <span className="services__number">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+
+                <div className="services__info">
+                  <h3>{service.title}</h3>
+
+                  <p>{service.description}</p>
+                </div>
+
+                <Link
+                  className="services__link"
+                  to={service.url}
+                >
+                  <span>Let's Work Together</span>
+
+                  <svg
+                    viewBox="0 0 16 16"
+                    width="15"
+                    height="15"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d={arrowPath}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
+export default Services
