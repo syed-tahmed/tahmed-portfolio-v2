@@ -3,7 +3,6 @@ import { contactPage } from '../data/site.js'
 import BannerAura from '../components/ui/BannerAura.jsx'
 import ContactForm from '../components/contact/ContactForm.jsx'
 import ContactCard from '../components/contact/ContactCard.jsx'
-import CinematicFindMe from '../components/contact/CinematicFindMe.jsx'
 import './Contact.css'
 
 function Contact() {
@@ -38,7 +37,6 @@ function Contact() {
         </div>
       </section>
 
-      <CinematicFindMe />
     </>
   )
 }
